@@ -1,10 +1,14 @@
-# @k-suite/algorithms
+# @genx/algorithm
 
 Common algorithms in JavaScript
 
-## Tree
+## Data structure
 
-## TopoSort
+### Tree
+
+### Graph
+
+### TopoSort
 
 ## License
 

@@ -1,2 +1,11 @@
-# gx-algorithm
-Commonly used data structure &amp; algorithms 
+# @k-suite/algorithms
+
+Common algorithms in JavaScript
+
+## Tree
+
+## TopoSort
+
+## License
+
+  MIT    

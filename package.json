@@ -7,7 +7,7 @@
     "access": "public"
   },
   "scripts": {
-    "doc": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -d './docs' -r --verbose ./src",    
+    "doc": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -d './docs' -r --verbose ./src",
     "test:spec": "mocha --recursive src/**/*.spec.js",
     "test:mocha": "mocha test/*.mocha.js",
     "test": "npm run test:spec && npm run test:mocha",

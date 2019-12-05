@@ -29,6 +29,7 @@ class Graph {
 
     setNode(key, value) {
         this.nodes[key] = value;
+        return this;
     }
 
     setEdge(sourceNode, targetNode) {
@@ -39,6 +40,7 @@ class Graph {
             throw new Error(`Target node [${targetNode}] not exists.`);
         }
         this.topo.add(sourceNode, targetNode);
+        return this;
     }
 
     getTargetNodes(sourceNode) {
@@ -53,6 +55,7 @@ class Graph {
         let seq = this.topo.sort();
         this.startNodes = _.takeWhile(seq, e => !this.topo.hasDependency(e));
         this.endNodes = _.takeRightWhile(seq, e => !this.topo.hasDependent(e));
+        return this;
     }
 
     toJSON() {

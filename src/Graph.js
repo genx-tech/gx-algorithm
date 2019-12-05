@@ -55,6 +55,15 @@ class Graph {
         let seq = this.topo.sort();
         this.startNodes = _.takeWhile(seq, e => !this.topo.hasDependency(e));
         this.endNodes = _.takeRightWhile(seq, e => !this.topo.hasDependent(e));
+
+        if (this.startNodes.length === 0) {
+            this.startNodes = Object.keys(this.nodes);
+        }
+
+        if (this.endNodes.length === 0) {
+            this.endNodes = Object.keys(this.nodes);
+        }
+
         return this;
     }
 

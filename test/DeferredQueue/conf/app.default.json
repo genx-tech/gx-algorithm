@@ -1,0 +1,31 @@
+{
+    "timezone": "Australia/Sydney",
+    "dataSource": {
+        "mysql": {
+            "test": {
+                "connection": "mysql://root:root@localhost/gx-algorithm",
+                "logStatement": true
+            }
+        }
+    },
+    "useDb": {        
+        "test": {
+            "dataSource": "mysql.test"
+        }
+    },
+    "settings": {
+        "geml": {
+            "modelPath": "test/DeferredQueue/models",
+            "gemlPath": "test/DeferredQueue/geml",
+            "scriptPath": "test/DeferredQueue/scripts",
+            "manifestPath": "test/DeferredQueue/manifests",
+            "useJsonSource": false,
+            "saveIntermediate": false,
+            "schemas": { 
+                "test": {
+                    "dataSource": "mysql.test"
+                }
+            }
+        }
+    }
+}

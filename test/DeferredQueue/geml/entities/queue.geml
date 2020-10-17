@@ -1,0 +1,12 @@
+entity queue
+  with
+    autoId({ type: 'uuid' })
+    createTimestamp
+  has
+    batchId : text maxLength(32)
+    job : text maxLength(200) 
+    dueAt : datetime        
+    dispatchedAt : datetime        
+    lockFlag : boolean
+  index
+    [ job, batchId ] is unique

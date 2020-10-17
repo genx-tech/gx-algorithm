@@ -1,6 +1,6 @@
 
 /**
- * id, job, dueAt, status, batchId (default '*')
+ * id, job, dueAt, status, batchId (default '*'), dispatchedAt, lockFlag
  * uniqueKeys: [ job, batchId ]
  * 
  * todo: automatically create db structure if not exist
@@ -105,8 +105,6 @@ class DeferredQueue {
             ],
             $skipOrm: true
         });
-
-        console.log(batchStats);
 
         let pending = 0, processing = 0, batches = {};
 

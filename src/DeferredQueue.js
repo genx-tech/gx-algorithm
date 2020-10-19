@@ -17,7 +17,7 @@ class DeferredQueue {
         return Generators.shortid();
     }
 
-    async postFutureJob_(job, deferedTime) {
+    async postJobRequest_(job, deferedTime) {
         const now = this.app.now();
         const due = now.plus({ milliseconds: deferedTime || 3000 });
 
@@ -32,34 +32,33 @@ class DeferredQueue {
         return queuedJob;
     }
 
-    async popExpiredJobs_() {
+    async popExpiredRequests_() {
         const expired = this.app.now().minus({ milliseconds: this.processTimeout });
-        const batchId = this.genreateBatchId();
+        const lockerId = this.genreateBatchId();
 
         const updated = await this.storage.updateMany_({            
-            batchId,
-            lockFlag: true
+            lockerId
         }, {
             $query: {
                 batchId: { $neq: '*' },
                 dispatchedAt: { $lte: expired },
-                lockFlag: { $neq: true }
+                lockerId: { $exists: false }
             },
             $retrieveUpdated: {
                 $query: {
-                    batchId
+                    lockerId
                 }
             }
         });
 
         if (updated.length > 0) {
-            await this.removeByBatch_(batchId);
+            await this.remove_({ lockerId });
         }        
 
         return updated;
     }
 
-    async markDueJobs_() {
+    async processDueRequests_() {
         const now = this.app.now();
         const batchId = this.genreateBatchId();        
 
@@ -81,8 +80,8 @@ class DeferredQueue {
         return updated;
     }
 
-    async removeByBatch_(batchId) {
-        await this.storage.deleteMany_({ batchId });
+    async remove_(conditon) {
+        await this.storage.deleteMany_(conditon);
     }
 
     async removeById_(id) {
@@ -100,7 +99,7 @@ class DeferredQueue {
                 this.storage.db.connector.queryCount(null, "batchId")
             ],
             $query: {
-                lockFlag: { $neq: 1 }
+                lockerId: { $exists: false }
             },
             $groupBy: [
                 'batchId'

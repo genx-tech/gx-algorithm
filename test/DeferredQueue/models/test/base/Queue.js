@@ -60,10 +60,12 @@ module.exports = (Base) => {
                 "displayName": "Dispatched At",
                 "createByDb": true
             },
-            "lockFlag": {
-                "type": "boolean",
-                "displayName": "Lock Flag",
-                "createByDb": true
+            "lockerId": {
+                "type": "text",
+                "maxLength": 32,
+                "emptyAsNull": true,
+                "optional": true,
+                "displayName": "Locker Id"
             },
             "createdAt": {
                 "type": "datetime",
@@ -99,6 +101,11 @@ module.exports = (Base) => {
                     "job"
                 ],
                 "unique": true
+            },
+            {
+                "fields": [
+                    "lockerId"
+                ]
             }
         ],
         "fieldDependencies": {

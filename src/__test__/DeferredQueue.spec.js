@@ -36,26 +36,26 @@ describe.only('DeferredQueue', function () {
     it('empty job', async function () {       
         await queue.clearQueue_();
         
-        const jobs = await queue.markDueJobs_();
+        const jobs = await queue.processDueRequests_();
         jobs.length.should.be.exactly(0);        
     });
 
     it('post a job', async function () {   
         await queue.clearQueue_();
 
-        const job = await queue.postFutureJob_({
+        const job = await queue.postJobRequest_({
             id: 'test',
             payload: 20
         }, 1000);
         should.exist(job.id);
         job.batchId.should.be.exactly('*');
 
-        let jobs = await queue.markDueJobs_();
+        let jobs = await queue.processDueRequests_();
         jobs.length.should.be.exactly(0);        
 
         await sleep_(1500);
 
-        jobs = await queue.markDueJobs_();
+        jobs = await queue.processDueRequests_();
         jobs.length.should.be.exactly(1);   
         should.exist(jobs[0].batchId);
         jobs[0].batchId.should.not.eql('*');
@@ -64,43 +64,43 @@ describe.only('DeferredQueue', function () {
     it('only one pending job with same type', async function () {   
         await queue.clearQueue_();
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test',
             payload: 20
         }, 100);
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test',
             payload: 20
         }, 100);
 
         await sleep_(500);
 
-        let jobs = await queue.markDueJobs_();
+        let jobs = await queue.processDueRequests_();
         jobs.length.should.be.exactly(1);        
     });
 
     it('no limit with different type or param', async function () {   
         await queue.clearQueue_();
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test',
             payload: 20
         }, 100);
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test2',
             payload: 20
         }, 100);
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test',
             payload: 30
         }, 100);
 
         await sleep_(500);
 
-        let jobs = await queue.markDueJobs_();
+        let jobs = await queue.processDueRequests_();
         jobs.length.should.be.exactly(3);        
     });
 
@@ -109,17 +109,17 @@ describe.only('DeferredQueue', function () {
 
         queue.processTimeout = 500;
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test',
             payload: 20
         }, 500);
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test2',
             payload: 20
         }, 3000);
 
-        await queue.postFutureJob_({
+        await queue.postJobRequest_({
             id: 'test',
             payload: 30
         }, 500);
@@ -130,14 +130,14 @@ describe.only('DeferredQueue', function () {
 
         await sleep_(1000);
 
-        await queue.markDueJobs_();
+        await queue.processDueRequests_();
 
         stats = await queue.getBatchStatus_();
 
         stats.numPending.should.be.exactly(1);
         stats.numProcessing.should.be.exactly(2);
         
-        let popped = await queue.popExpiredJobs_();
+        let popped = await queue.popExpiredRequests_();
         popped.length.should.be.exactly(0);
 
         stats = await queue.getBatchStatus_();
@@ -147,7 +147,7 @@ describe.only('DeferredQueue', function () {
         
         await sleep_(1000);
 
-        popped = await queue.popExpiredJobs_();
+        popped = await queue.popExpiredRequests_();
         popped.length.should.be.exactly(2);
 
         stats = await queue.getBatchStatus_();
@@ -158,7 +158,7 @@ describe.only('DeferredQueue', function () {
 
         await sleep_(1500);
 
-        const jobs = await queue.markDueJobs_();
+        const jobs = await queue.processDueRequests_();
         jobs.length.should.be.exactly(1);
     });
 });

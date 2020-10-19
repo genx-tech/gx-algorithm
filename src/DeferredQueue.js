@@ -52,7 +52,9 @@ class DeferredQueue {
             }
         });
 
-        await this.removeByBatch_(batchId);
+        if (updated.length > 0) {
+            await this.removeByBatch_(batchId);
+        }        
 
         return updated;
     }

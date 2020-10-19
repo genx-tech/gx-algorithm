@@ -8,7 +8,7 @@ const DeferredQueue = require('../DeferredQueue');
 
 const WORKING_DIR = path.resolve(__dirname, '../../test/DeferredQueue');
 
-describe('DeferredQueue', function () {
+describe.only('DeferredQueue', function () {
     let cliApp, queue;
 
     before(async function () {
@@ -46,14 +46,14 @@ describe('DeferredQueue', function () {
         const job = await queue.postFutureJob_({
             id: 'test',
             payload: 20
-        }, 500);
+        }, 1000);
         should.exist(job.id);
         job.batchId.should.be.exactly('*');
 
         let jobs = await queue.markDueJobs_();
         jobs.length.should.be.exactly(0);        
 
-        await sleep_(1000);
+        await sleep_(1500);
 
         jobs = await queue.markDueJobs_();
         jobs.length.should.be.exactly(1);   

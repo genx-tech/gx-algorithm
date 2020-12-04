@@ -1,0 +1,21 @@
+{
+    "id": {
+        "type": "text"
+    },
+    "batchId": {
+        "type": "text"
+    },
+    "job": {
+        "type": "text"
+    },
+    "dueAt": {
+        "type": "datetime"
+    },
+    "dispatchedAt": {
+        "type": "datetime"
+    },
+    "lockerId": {
+        "type": "text",
+        "optional": true
+    }
+}

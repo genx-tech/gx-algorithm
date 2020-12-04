@@ -41,24 +41,20 @@ module.exports = (Base) => {
             "batchId": {
                 "type": "text",
                 "maxLength": 32,
-                "displayName": "Batch Id",
-                "createByDb": true
+                "displayName": "Batch Id"
             },
             "job": {
                 "type": "text",
                 "maxLength": 200,
-                "displayName": "Job",
-                "createByDb": true
+                "displayName": "Job"
             },
             "dueAt": {
                 "type": "datetime",
-                "displayName": "Due At",
-                "createByDb": true
+                "displayName": "Due At"
             },
             "dispatchedAt": {
                 "type": "datetime",
-                "displayName": "Dispatched At",
-                "createByDb": true
+                "displayName": "Dispatched At"
             },
             "lockerId": {
                 "type": "text",

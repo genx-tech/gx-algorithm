@@ -12,4 +12,4 @@ Common algorithms in JavaScript
 
 ## License
 
-  MIT    
+MIT

@@ -2,11 +2,11 @@
 
 const TopoSort = require('../TopoSort');
 
-describe('unit:TopoSort', function () {  
+describe('unit:TopoSort', function () {
     let topoSort = new TopoSort();
-        
-    topoSort.add('step1', [ 'step2', 'step3' ]);
-    topoSort.add('step2', [ 'step4', 'step5' ]);
+
+    topoSort.add('step1', ['step2', 'step3']);
+    topoSort.add('step2', ['step4', 'step5']);
     topoSort.add('step2', 'step6');
     topoSort.add('step3', 'step6');
 
@@ -27,18 +27,25 @@ describe('unit:TopoSort', function () {
         step4Dep.should.be.ok();
 
         step4Dep = topoSort.hasDependent('step4');
-        step4Dep.should.not.be.ok();        
+        step4Dep.should.not.be.ok();
     });
 
     it('sort', function () {
         let sorted = topoSort.sort();
 
-        sorted.should.be.deepEqual(['step1', 'step2', 'step3', 'step4', 'step5', 'step6'])
+        sorted.should.be.deepEqual([
+            'step1',
+            'step2',
+            'step3',
+            'step4',
+            'step5',
+            'step6',
+        ]);
     });
 
     it('throw on circular dependence', function () {
         topoSort.add('step5', 'step1');
 
-        should.throws(() => topoSort.sort());        
+        should.throws(() => topoSort.sort());
     });
 });

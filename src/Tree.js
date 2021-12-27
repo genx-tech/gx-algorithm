@@ -1,4 +1,4 @@
-const { _ } = require('rk-utils');
+const { _ } = require('@genx/july');
 
 /**
  * A closure function to be called to check the data of each node whether meets certain condition
@@ -12,27 +12,28 @@ const { _ } = require('rk-utils');
  * @param {Node} Node
  * @returns {Tree}
  */
-const Tree = Node => class extends Node {
-    static Node = Node;
+const Tree = (Node) =>
+    class extends Node {
+        static Node = Node;
 
-    /**
-     * Find a node by BFS.
-     * @param {predicateFunction} predicate 
-     */
-    find(predicate) {
-        let queue = Node.cloneChildrenList(this);
+        /**
+         * Find a node by BFS.
+         * @param {predicateFunction} predicate
+         */
+        find(predicate) {
+            let queue = Node.cloneChildrenList(this);
 
-        while (queue.length > 0) {
-            let node = queue.shift();
+            while (queue.length > 0) {
+                const node = queue.shift();
 
-            if (predicate(node)) return node;
+                if (predicate(node)) return node;
 
-            queue = queue.concat(Node.cloneChildrenList(node));
+                queue = queue.concat(Node.cloneChildrenList(node));
+            }
+
+            return undefined;
         }
-
-        return undefined;
-    }    
-};
+    };
 
 /**
  * Tree node with data property.
@@ -51,7 +52,7 @@ class DataNode {
 
     /**
      * Create a data node with given data.
-     * @param {*} data 
+     * @param {*} data
      */
     constructor(data) {
         /**
@@ -71,38 +72,36 @@ class DataNode {
 
     /**
      * Append the given node to the end of the children list.
-     * @param {DataNode} node 
+     * @param {DataNode} node
      */
     append(node) {
-        pre: node instanceof DataNode;
-
         node.parent = this;
         this.children.push(node);
     }
 
     /**
      * Insert the given node at specified index in the children list.
-     * @param {number} i 
-     * @param {DataNode} node 
+     * @param {number} i
+     * @param {DataNode} node
      */
     insert(i, node) {
-        pre: node instanceof DataNode;
-
         node.parent = this;
         this.children.splice(Math.max(0, i), 0, node);
     }
 
     /**
      * Remove the given node from the branch.
-     * @param {DataNode} node 
+     * @param {DataNode} node
      * @returns {DataNode}
      */
     remove(node) {
         if (node.parent !== this) {
-            throw new Error('Removing a node which is not a child of the current node.');
+            throw new Error(
+                'Removing a node which is not a child of the current node.'
+            );
         }
 
-        this.children = _.reject(this.children, n => n === node);
+        this.children = _.reject(this.children, (n) => n === node);
         delete node.parent;
 
         return node;
@@ -110,11 +109,11 @@ class DataNode {
 
     /**
      * Remove the node at the given index from the branch.
-     * @param {number} i 
-     * @returns {DataNode} 
+     * @param {number} i
+     * @returns {DataNode}
      */
     removeAtIndex(i) {
-        let [removed] = this.children.splice(i, 1);
+        const [removed] = this.children.splice(i, 1);
         if (removed) {
             delete removed.parent;
         }
@@ -131,7 +130,7 @@ class KeyDataNode {
     static cloneChildrenList(node) {
         return Object.values(node.children);
     }
-    
+
     /**
      * Map of keys to children nodes.
      * @member {object}
@@ -140,8 +139,8 @@ class KeyDataNode {
 
     /**
      * Create a key-data node with key and given data.
-     * @param {string} key 
-     * @param {*} data 
+     * @param {string} key
+     * @param {*} data
      */
     constructor(key, data) {
         /**
@@ -167,7 +166,7 @@ class KeyDataNode {
 
     /**
      * Fina a node by path being an array of keys.
-     * @param {array.<string>} keys 
+     * @param {array.<string>} keys
      */
     findByKeyPath(keys) {
         keys = keys.concat();
@@ -178,7 +177,7 @@ class KeyDataNode {
 
         let value = { children: { [this.key]: this } };
 
-        _.find(keys, key => {
+        _.find(keys, (key) => {
             value = value.children[key];
             return typeof value === 'undefined';
         });
@@ -188,21 +187,26 @@ class KeyDataNode {
 
     /**
      * Append data by path being an array of keys.
-     * @param {array.<string>} keys 
-     * @param {*} data 
+     * @param {array.<string>} keys
+     * @param {*} data
      * @returns {KeyDataNode} The newly created node containing the data.
      */
-    appendDataByKeyPath(keys, data) {        
+    appendDataByKeyPath(keys, data) {
         keys = keys.concat();
 
         if (keys.length === 0 || keys[0] !== this.key) {
-            throw new Error(`The given key path "${keys.join(' / ')}" is not starting from the correct initial key "${this.key}".`);
+            throw new Error(
+                `The given key path "${keys.join(
+                    ' / '
+                )}" is not starting from the correct initial key "${this.key}".`
+            );
         }
 
-        let lastKey = keys.pop();
-        let lastNode = { children: { [this.key]: this } }, node;
+        const lastKey = keys.pop();
+        let lastNode = { children: { [this.key]: this } };
+        let node;
 
-        _.each(keys, key => {
+        _.each(keys, (key) => {
             if (key in lastNode.children) {
                 lastNode = lastNode.children[key];
             } else {
@@ -220,14 +224,12 @@ class KeyDataNode {
 
     /**
      * Append the given node to the end of the children list.
-     * @param {KeyDataNode} node 
+     * @param {KeyDataNode} node
      */
     append(node) {
-        pre: node instanceof KeyDataNode;
-
         node.parent = this;
 
-        if (this.children.hasOwnProperty(node.key)) {
+        if (node.key in this.children) {
             throw new Error(`Duplicate node key: ${node.key}`);
         }
 
@@ -236,11 +238,13 @@ class KeyDataNode {
 
     /**
      * Remove the given node from the branch.
-     * @param {KeyDataNode} node 
+     * @param {KeyDataNode} node
      */
     remove(node) {
-        if (node.parent !== this || !this.children.hasOwnProperty(node.key)) {
-            throw new Error('Removing a node which is not a child of the current node.');
+        if (node.parent !== this || !(node.key in this.children)) {
+            throw new Error(
+                'Removing a node which is not a child of the current node.'
+            );
         }
 
         delete this.children[node.key];
@@ -254,7 +258,7 @@ class KeyDataNode {
      * @returns {array}
      */
     getKeyPath() {
-        let paths = [ this.key ];
+        const paths = [this.key];
         let curr = this;
 
         while (curr.parent) {
@@ -268,5 +272,5 @@ class KeyDataNode {
 
 module.exports = {
     Tree: Tree(DataNode),
-    KeyTree: Tree(KeyDataNode)
+    KeyTree: Tree(KeyDataNode),
 };

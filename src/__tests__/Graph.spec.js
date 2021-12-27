@@ -2,7 +2,7 @@
 
 const Graph = require('../Graph');
 
-describe('unit:graph', function () {  
+describe('unit:graph', function () {
     let graph = new Graph();
     graph.setNode('node1', { data: 1 });
     graph.setNode('node2', { data: 2 });
@@ -31,7 +31,7 @@ describe('unit:graph', function () {
         graph.endNodes[0].should.be.equal('node6');
     });
 
-    it('to json', function() {
+    it('to json', function () {
         json = graph.toJSON();
         json.should.has.keys('nodes', 'edges', 'startNodes', 'endNodes');
         json.startNodes.length.should.be.exactly(1);
@@ -41,7 +41,7 @@ describe('unit:graph', function () {
         json.endNodes[0].should.be.equal('node6');
     });
 
-    it('from json', function() {
+    it('from json', function () {
         let g2 = new Graph(json);
         g2.startNodes.length.should.be.exactly(1);
         g2.startNodes[0].should.be.equal('node1');

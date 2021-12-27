@@ -1,5 +1,5 @@
 const TopoSort = require('./TopoSort');
-const { _ } = require('rk-utils');
+const { _ } = require('@genx/july');
 
 class Graph {
     constructor(json) {
@@ -7,8 +7,8 @@ class Graph {
 
         if (json) {
             this.nodes = _.cloneDeep(json.nodes);
-            if (_.isEmpty(json.edges)) {
-                _.forOwn(edges, (targets, source) => {
+            if (!_.isEmpty(json.edges)) {
+                _.forOwn(json.edges, (targets, source) => {
                     this.topo.add(source, targets);
                 });
             }
@@ -16,7 +16,7 @@ class Graph {
             this.endNodes = json.endNodes;
         } else {
             this.nodes = {};
-        }        
+        }
     }
 
     hasNode(key) {
@@ -52,9 +52,12 @@ class Graph {
     }
 
     calcStartEnd() {
-        let seq = this.topo.sort();
-        this.startNodes = _.takeWhile(seq, e => !this.topo.hasDependency(e));
-        this.endNodes = _.takeRightWhile(seq, e => !this.topo.hasDependent(e));
+        const seq = this.topo.sort();
+        this.startNodes = _.takeWhile(seq, (e) => !this.topo.hasDependency(e));
+        this.endNodes = _.takeRightWhile(
+            seq,
+            (e) => !this.topo.hasDependent(e)
+        );
 
         if (this.startNodes.length === 0) {
             this.startNodes = Object.keys(this.nodes);
@@ -70,9 +73,11 @@ class Graph {
     toJSON() {
         return {
             nodes: this.nodes,
-            edges: _.mapValues(this.topo.mapOfDependents, (nodes) => Array.from(nodes)),
+            edges: _.mapValues(this.topo.mapOfDependents, (nodes) =>
+                Array.from(nodes)
+            ),
             startNodes: this.startNodes,
-            endNodes: this.endNodes
+            endNodes: this.endNodes,
         };
     }
 }

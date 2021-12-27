@@ -1,58 +1,151 @@
 {
-  "name": "@genx/algorithm",
-  "version": "1.0.2",
-  "description": "Commonly used data structure & algorithms",
-  "main": "lib/index.js",
-  "publishConfig": {
-    "access": "public"
-  },
-  "scripts": {
-    "doc": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -d './docs' -r --verbose ./src",
-    "test:spec": "mocha --recursive src/**/*.spec.js",
-    "test:mocha": "mocha test/*.mocha.js",
-    "test": "npm run test:spec && npm run test:mocha",
-    "cover": "nyc --reporter=html --reporter=text npm run test:all --timeout 5000 && rm -rf ./.nyc_output",
-    "bulid:clean": "rm -rf lib",
-    "build": "npm run bulid:clean && NODE_ENV=development babel src -d lib --copy-files && del lib/**/__test__",
-    "build:prod": "npm run bulid:clean && NODE_ENV=production babel src -d lib --copy-files && del lib/**/__test__"
-  },
-  "author": "Rockie Guo <rockie@kitmi.com.au>",
-  "license": "MIT",
-  "repository": "https://github.com/genx-tech/gx-algorithm.git",
-  "bugs": {
-    "url": "https://github.com/genx-tech/gx-algorithm/issues"
-  },
-  "keywords": [
-    "app",
-    "worker"
-  ],
-  "mocha": {
-    "require": [
-      "@babel/register",
-      "should"
+    "name": "@genx/algorithm",
+    "version": "2.0.0",
+    "description": "Commonly used data structure & algorithms",
+    "main": "lib/commonjs/index",
+    "module": "lib/module/index",
+    "react-native": "src/index.js",
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "doc": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -d './docs' -r --verbose ./src",
+        "test:clean": "rm -rf allure-results",
+        "test": "npm run test:clean && mocha --reporter mocha-multi --reporter-options mocha-multi=test/mocha-multi-reporters.json test/*.spec.js",
+        "test:unit": "mocha --recursive src/**/*.spec.js",
+        "cover": "npm run test:clean && COVER_MODE=1 NODE_RT=babel nyc --reporter=html --reporter=text -- mocha --reporter progress test/*.spec.js && open ./coverage/index.html",
+        "cover:unit": "nyc --reporter=html --reporter=text mocha --recursive src/**/*.spec.js",
+        "report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+        "prettier": "prettier --write .",
+        "lint": "eslint \"**/*.js\"",
+        "lint:fix": "eslint --fix \"src/**/*.js\"",
+        "clean": "del lib",
+        "build": "bob build",
+        "release": "release-it",
+        "prepare": "npm run clean && npm run build"
+    },
+    "author": "Rockie Guo <rockie@kitmi.com.au>",
+    "license": "MIT",
+    "repository": "https://github.com/genx-tech/gx-algorithm.git",
+    "bugs": {
+        "url": "https://github.com/genx-tech/gx-algorithm/issues"
+    },
+    "keywords": [
+        "app",
+        "worker"
     ],
-    "timeout": 30000
-  },
-  "nyc": {
-    "exclude": [
-      "babel.config.js",
-      "test",
-      "lib",
-      "**/*.spec.js"
-    ]
-  },
-  "dependencies": {
-    "@genx/error": "^1.0.2"
-  },
-  "peerDependencies": {
-    "rk-utils": "^2.2.6"
-  },
-  "devDependencies": {
-    "@genx/app": "genx-tech/gx-app",
-    "@genx/data": "genx-tech/gx-data",
-    "@genx/model": "genx-tech/gx-model",
-    "ink-docstrap": "^1.3.2",
-    "mysql2": "^2.2.5",
-    "shortid": "^2.2.15"
-  }
+    "mocha": {
+        "require": [
+            "@babel/register",
+            "should"
+        ],
+        "timeout": 30000
+    },
+    "nyc": {
+        "exclude": [
+            "babel.config.js",
+            "test",
+            "lib",
+            "**/*.spec.js"
+        ]
+    },
+    "dependencies": {
+        "@genx/error": "*",
+        "@genx/july": "*"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.14.8",
+        "@babel/core": "^7.15.0",
+        "@babel/eslint-parser": "^7.16.5",
+        "@babel/plugin-proposal-class-properties": "^7.14.5",
+        "@babel/plugin-proposal-decorators": "^7.14.5",
+        "@babel/preset-env": "^7.15.0",
+        "@babel/register": "^7.15.3",
+        "@commitlint/config-conventional": "^11.0.0",
+        "@genx/test": "github:genx-tech/gx-test#v2",
+        "@react-native-community/eslint-config": "^2.0.0",
+        "@release-it/conventional-changelog": "^2.0.0",
+        "babel-plugin-source-map-support": "^2.1.3",
+        "commitlint": "^11.0.0",
+        "del-cli": "^4.0.1",
+        "eslint": "^7.2.0",
+        "eslint-config-prettier": "^7.0.0",
+        "eslint-config-standard": "^16.0.3",
+        "eslint-plugin-import": "^2.25.3",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "eslint-plugin-promise": "^6.0.0",
+        "husky": "^4.2.5",
+        "ink-docstrap": "^1.3.2",
+        "jsdoc": "^3.6.7",
+        "mocha": "^9.1.1",
+        "nyc": "^15.1.0",
+        "prettier": "^2.0.5",
+        "react-native-builder-bob": "^0.18.1",
+        "release-it": "^14.2.2",
+        "should": "^13.2.3",
+        "source-map-support": "^0.5.19"
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "pre-commit": "npm run lint"
+        }
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "release-it": {
+        "git": {
+            "commitMessage": "chore: release ${version}",
+            "tagName": "v${version}"
+        },
+        "npm": {
+            "publish": true
+        },
+        "github": {
+            "release": true
+        },
+        "plugins": {
+            "@release-it/conventional-changelog": {
+                "preset": "angular"
+            }
+        }
+    },
+    "eslintConfig": {
+        "parser": "@babel/eslint-parser",
+        "extends": [
+            "standard",
+            "prettier"
+        ]
+    },
+    "eslintIgnore": [
+        "/node_modules",
+        "/lib",
+        "/dist",
+        "/test",
+        "/patches",
+        "/docs",
+        "/**/__test__",
+        "/**/__tests__",
+        "babel.config.js",
+        "rollup.config.js"
+    ],
+    "prettier": {
+        "quoteProps": "consistent",
+        "singleQuote": true,
+        "tabWidth": 4,
+        "trailingComma": "es5",
+        "useTabs": false
+    },
+    "react-native-builder-bob": {
+        "source": "src",
+        "output": "lib",
+        "targets": [
+            "commonjs",
+            "module"
+        ]
+    }
 }

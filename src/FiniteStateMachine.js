@@ -1,50 +1,62 @@
-const { _, eachAsync_ } = require('rk-utils');
+const { eachAsync_ } = require('@genx/july');
 const { InvalidArgument, Forbidden } = require('@genx/error');
 
 /**
- * 
- * Action rule: 
+ *
+ * Action rule:
  *  desc: description of this transition
  *  when: pre transition condition check
  *  target: target state
- *  before: transforming before applying to the state 
+ *  before: transforming before applying to the state
  *  after: trigger another action after transition
  */
 
-class FiniteStateMachine {    
+class FiniteStateMachine {
     static OK = [true];
     static fail = (reason) => [false, reason];
-    static triggerAll_ = (array) => (...args) => eachAsync_(array, action_ => action_(...args));
-    static ifAny = (array) => async (...args) => {
-        let l = array.length, reason = [];
+    static triggerAll_ =
+        (array) =>
+        (...args) =>
+            eachAsync_(array, (action_) => action_(...args));
 
-        for (let i = 0; i < l; i++) {
-            const checker_ = array[i];
+    static ifAny =
+        (array) =>
+        async (...args) => {
+            const l = array.length;
+                const reason = [];
 
-            const [ allowed, disallowedReason ] = await checker_(...args);
-            if (allowed) {
-                return FiniteStateMachine.OK;
+            for (let i = 0; i < l; i++) {
+                const checker_ = array[i];
+
+                const [allowed, disallowedReason] = await checker_(...args);
+                if (allowed) {
+                    return FiniteStateMachine.OK;
+                }
+
+                reason.push(disallowedReason);
             }
 
-            reason.push(disallowedReason);
-        }
-        
-        return FiniteStateMachine.fail('None of the required conditions met.\n' + reason.join('\n'));
-    };
-    static ifAll = array => async (...args) => {
-        let l = array.length;
+            return FiniteStateMachine.fail(
+                'None of the required conditions met.\n' + reason.join('\n')
+            );
+        };
 
-        for (let i = 0; i < l; i++) {
-            const checker_ = array[i];
+    static ifAll =
+        (array) =>
+        async (...args) => {
+            const l = array.length;
 
-            const [ allowed, disallowedReason ] = await checker_(...args);
-            if (!allowed) {
-                return FiniteStateMachine.fail(disallowedReason);
+            for (let i = 0; i < l; i++) {
+                const checker_ = array[i];
+
+                const [allowed, disallowedReason] = await checker_(...args);
+                if (!allowed) {
+                    return FiniteStateMachine.fail(disallowedReason);
+                }
             }
-        }
-        
-        return FiniteStateMachine.OK;
-    };
+
+            return FiniteStateMachine.OK;
+        };
 
     constructor(app, transitionTable, stateFetcher, stateUpdater) {
         this.app = app;
@@ -55,42 +67,47 @@ class FiniteStateMachine {
     }
 
     /**
-     * Get a list of allowed actions based on the current state.     
-     * @param {*} context 
+     * Get a list of allowed actions based on the current state.
+     * @param {*} context
      * @param {boolean} withDisallowedReason
      */
     async getAllowedActions_(context, withDisallowedReason) {
         const currentState = await this.stateFetcher_(this.app, context);
 
-        //from state
-        const transitions = this.transitions[currentState];    
+        // from state
+        const transitions = this.transitions[currentState];
         if (!transitions) {
-            throw new InvalidArgument(`State "${currentState}" rules not found in the transition table.`);
+            throw new InvalidArgument(
+                `State "${currentState}" rules not found in the transition table.`
+            );
         }
 
-        const allowed = [], disallowed = [];    
+        const allowed = [];
+            const disallowed = [];
 
         await eachAsync_(transitions, async (rule, action) => {
-            const [ actionAllowed, disallowedReason ] = (rule.when && await rule.when(this.app, context)) || FiniteStateMachine.OK;
+            const [actionAllowed, disallowedReason] =
+                (rule.when && (await rule.when(this.app, context))) ||
+                FiniteStateMachine.OK;
 
             if (actionAllowed) {
                 allowed.push({
                     action,
                     desc: rule.desc,
-                    targetState: rule.target
+                    targetState: rule.target,
                 });
             } else if (withDisallowedReason) {
                 disallowed.push({
                     action,
                     desc: rule.desc,
                     targetState: rule.target,
-                    reason: disallowedReason
+                    reason: disallowedReason,
                 });
             }
         });
 
         const ret = {
-            allowed
+            allowed,
         };
 
         if (withDisallowedReason) {
@@ -99,37 +116,59 @@ class FiniteStateMachine {
 
         return ret;
     }
-    
+
     /**
      * Perform the specified action.
-     * @param {*} action 
-     * @param {*} context     
-     * @param {*} payload 
-     * @param {*} updateOpts 
-     * @param {*} connOpts 
+     * @param {*} action
+     * @param {*} context
+     * @param {*} payload
+     * @param {*} updateOpts
+     * @param {*} connOpts
      */
-    async performAction_(action, context, payload, updateOpts, connOpts) {            
-        const currentState = await this.stateFetcher_(this.app, context, connOpts);
-        
-        const transitions = this.transitions[currentState];    
+    async performAction_(action, context, payload, updateOpts, connOpts) {
+        const currentState = await this.stateFetcher_(
+            this.app,
+            context,
+            connOpts
+        );
+
+        const transitions = this.transitions[currentState];
         if (!transitions) {
-            throw new InvalidArgument(`State "${currentState}" rules not found in the transition table.`);
+            throw new InvalidArgument(
+                `State "${currentState}" rules not found in the transition table.`
+            );
         }
 
         const rule = transitions && transitions[action];
         if (!rule) {
-            throw new Forbidden(`Action "${action}" is not allowed in "${currentState}" state.`);
+            throw new Forbidden(
+                `Action "${action}" is not allowed in "${currentState}" state.`
+            );
         }
 
         if (rule.when) {
-            const [ allowed, disallowedReason ] = await rule.when(this.app, context);
+            const [allowed, disallowedReason] = await rule.when(
+                this.app,
+                context
+            );
             if (!allowed) {
-                throw new Forbidden(disallowedReason || `The current state does not meet the requirements of "${action}" action.`);
+                throw new Forbidden(
+                    disallowedReason ||
+                        `The current state does not meet the requirements of "${action}" action.`
+                );
             }
         }
 
-        const entityUpdate = (rule.before && (await rule.before(this.app, context, payload))) || { ...payload };
-        const [ actuallyUpdated, updateResult ] = await this.stateUpdater_(this.app, context, entityUpdate, rule.target, updateOpts, connOpts);
+        const entityUpdate = (rule.before &&
+            (await rule.before(this.app, context, payload))) || { ...payload };
+        const [actuallyUpdated, updateResult] = await this.stateUpdater_(
+            this.app,
+            context,
+            entityUpdate,
+            rule.target,
+            updateOpts,
+            connOpts
+        );
 
         if (actuallyUpdated && rule.after) {
             await rule.after(this.app, context, connOpts);

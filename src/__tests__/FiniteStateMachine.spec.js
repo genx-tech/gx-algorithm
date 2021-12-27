@@ -3,49 +3,47 @@
 const { sleep_ } = require('rk-utils');
 const FSM = require('../FiniteStateMachine');
 
-describe.only('unit:fsm', function () {  
-    it('bvt', async function() {
+describe('unit:fsm', function () {
+    it('bvt', async function () {
         const atimer = {
             state: 'shutdown',
             time: 0,
-            handle: null
+            handle: null,
         };
 
         const transitionTable = {
-            'shutdown': {
-                'start': {
+            shutdown: {
+                start: {
                     target: 'running',
                     after: (_, timer) => {
                         console.log('trigger');
                         timer.handle = setInterval(() => {
                             timer.time++;
                         }, 100);
-                    }
+                    },
                 },
-                'stop': {
-
-                }
+                stop: {},
             },
-            'running': {
-                'start': {
+            running: {
+                start: {
                     when: (_, timer) => {
                         if (timer.time > 10) {
-                            return [ true ];
+                            return [true];
                         } else {
                             return [false, 'not passed 1 second'];
                         }
                     },
                     before: (_, timer) => {
                         return {
-                            time: 0
+                            time: 0,
                         };
-                    }
+                    },
                 },
-                'stop': {
+                stop: {
                     target: 'paused',
                     when: (_, timer) => {
                         if (timer.time > 10) {
-                            return [ true ];
+                            return [true];
                         } else {
                             return [false, 'not passed 1 second'];
                         }
@@ -55,23 +53,23 @@ describe.only('unit:fsm', function () {
                             clearInterval(timer.handle);
                             timer.handle = null;
                         }
-                    }
-                }
+                    },
+                },
             },
-            'paused': {
-                'start': {
+            paused: {
+                start: {
                     target: 'running',
                     when: (_, timer) => {
                         if (timer.handle) return [false, 'already started'];
                         return [true];
-                    },  
+                    },
                     after: (_, timer) => {
                         timer.handle = setInterval(() => {
                             timer.time++;
                         }, 100);
-                    }
+                    },
                 },
-                'stop': {
+                stop: {
                     target: 'shutdown',
                     when: (_, timer) => {
                         if (timer.handle) return [false, 'not paused'];
@@ -79,22 +77,27 @@ describe.only('unit:fsm', function () {
                     },
                     before: (_, timer) => {
                         return {
-                            time: 0
+                            time: 0,
                         };
-                    }
-                }
-            }
+                    },
+                },
+            },
         };
 
-        const fsm = new FSM(null, transitionTable, (_, timer) => timer.state, (_, timer, data, targetState) => {
-            if (targetState) {
-                data = { ...data, state: targetState };
+        const fsm = new FSM(
+            null,
+            transitionTable,
+            (_, timer) => timer.state,
+            (_, timer, data, targetState) => {
+                if (targetState) {
+                    data = { ...data, state: targetState };
+                }
+
+                Object.assign(timer, data);
+
+                return [true];
             }
-
-            Object.assign(timer, data);
-
-            return [ true ];
-        });
+        );
 
         let actions = await fsm.getAllowedActions_(atimer, true);
         actions.allowed.length.should.be.exactly(2);
@@ -133,5 +136,5 @@ describe.only('unit:fsm', function () {
 
         await fsm.performAction_('stop', atimer);
         atimer.state.should.be.exactly('shutdown');
-    });    
+    });
 });

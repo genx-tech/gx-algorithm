@@ -2,7 +2,7 @@
 
 const { Tree } = require('../Tree');
 
-describe('unit:tree:tree', function () {  
+describe('unit:tree:tree', function () {
     let tree = new Tree('root node');
     let node11 = new Tree.Node('level 1 node 1');
     let node12 = new Tree.Node('level 1 node 2');
@@ -22,25 +22,28 @@ describe('unit:tree:tree', function () {
         tree.size.should.be.exactly(2);
     });
 
-    it('find', function() {
-        let node = tree.find(n => n.data === 'level 2 node 2');
+    it('find', function () {
+        let node = tree.find((n) => n.data === 'level 2 node 2');
         should.exist(node);
 
-        node = tree.find(n => n.data === 'level 2 node 4');
+        node = tree.find((n) => n.data === 'level 2 node 4');
         should.not.exist(node);
     });
-    
+
     it('cru', function () {
         tree.children.length.should.be.exactly(2);
         node11.children.length.should.be.exactly(1);
         node12.children.length.should.be.exactly(2);
 
-        tree.remove(node12);        
+        tree.remove(node12);
 
         tree.size.should.be.exactly(1);
         should.not.exists(node12.parent);
 
-        should.throws(() => tree.remove(node12), 'Removing a node which is not a child of the current node.');
+        should.throws(
+            () => tree.remove(node12),
+            'Removing a node which is not a child of the current node.'
+        );
     });
 
     it('insert and remove by index', function () {

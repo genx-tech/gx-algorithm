@@ -7,7 +7,6 @@
 jsdoc.json
 babel.config.js
 *.log
-*.md
 src
 test
 examples

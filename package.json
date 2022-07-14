@@ -10,19 +10,17 @@
     },
     "scripts": {
         "doc": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -d './docs' -r --verbose ./src",
-        "test:clean": "rm -rf allure-results",
-        "test": "npm run test:clean && mocha --reporter mocha-multi --reporter-options mocha-multi=test/mocha-multi-reporters.json test/*.spec.js",
-        "test:unit": "mocha --recursive src/**/*.spec.js",
-        "cover": "npm run test:clean && COVER_MODE=1 NODE_RT=babel nyc --reporter=html --reporter=text -- mocha --reporter progress test/*.spec.js && open ./coverage/index.html",
-        "cover:unit": "nyc --reporter=html --reporter=text mocha --recursive src/**/*.spec.js",
-        "report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+        "test:clean": "rm -rf coverage",
+        "test": "npm run test:clean && mocha --reporter mocha-multi --reporter-options mocha-multi=test/mocha-multi-reporters.json src/**/*.spec.js",
+        "cover": "npm run test:clean && COVER_MODE=1 NODE_RT=babel nyc --reporter=html --reporter=text -- mocha --reporter progress src/**/*.spec.js && open ./coverage/index.html",
         "prettier": "prettier --write .",
         "lint": "eslint \"**/*.js\"",
         "lint:fix": "eslint --fix \"src/**/*.js\"",
+        "commitlint": "commitlint --edit \"$1\"",
         "clean": "del lib",
-        "build": "bob build",
+        "build": "npm run clean && bob build",
         "release": "release-it",
-        "prepare": "npm run clean && npm run build"
+        "prepare": "husky install"
     },
     "author": "Rockie Guo <rockie@kitmi.com.au>",
     "license": "MIT",
@@ -62,9 +60,13 @@
         "@babel/preset-env": "^7.15.0",
         "@babel/register": "^7.15.3",
         "@commitlint/config-conventional": "^11.0.0",
-        "@genx/test": "github:genx-tech/gx-test#v2",
+        "@genx/app": "^2.0.4",
+        "@genx/data": "^2.1.1",
+        "@genx/model": "^2.0.0",
+        "@genx/sys": "^0.1.6",
         "@react-native-community/eslint-config": "^2.0.0",
         "@release-it/conventional-changelog": "^2.0.0",
+        "babel-plugin-add-module-exports": "^1.0.4",
         "babel-plugin-source-map-support": "^2.1.3",
         "commitlint": "^11.0.0",
         "del-cli": "^4.0.1",
@@ -75,22 +77,19 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-promise": "^6.0.0",
-        "husky": "^4.2.5",
+        "husky": "^8.0.1",
         "ink-docstrap": "^1.3.2",
         "jsdoc": "^3.6.7",
         "mocha": "^9.1.1",
+        "mysql2": "^2.3.3",
         "nyc": "^15.1.0",
         "prettier": "^2.0.5",
         "react-native-builder-bob": "^0.18.1",
         "release-it": "^14.2.2",
+        "rk-utils": "^2.2.6",
+        "shortid": "^2.2.16",
         "should": "^13.2.3",
         "source-map-support": "^0.5.19"
-    },
-    "husky": {
-        "hooks": {
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "npm run lint"
-        }
     },
     "commitlint": {
         "extends": [
@@ -144,7 +143,12 @@
         "source": "src",
         "output": "lib",
         "targets": [
-            "commonjs",
+            [
+                "commonjs",
+                {
+                    "configFile": "./babel.config.js"
+                }
+            ],
             "module"
         ]
     }

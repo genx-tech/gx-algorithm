@@ -1,5 +1,5 @@
 const path = require('path');
-const { _, pascalCase, fs } = require('rk-utils');
+const { fs } = require('@genx/sys');
 
 const { DbModel } = require('@genx/data');
 
@@ -9,6 +9,10 @@ class Test extends DbModel {
         
         this.schemaName = 'test';
         this.entities = ["queue"];        
+    }
+
+    require(moduleRelativePath) {        
+        return require(path.resolve(__dirname, this.schemaName, moduleRelativePath));       
     }
 
     loadCustomModel(modelClassName) { 
@@ -29,7 +33,7 @@ class Test extends DbModel {
 
         try {
             connection = await this.connector.beginTransaction_();
-            let ret = await transaction({...connOptions, connection});
+            const ret = await transaction({...connOptions, connection});
             await this.connector.commit_(connection);
             return ret;
         } catch(error) {

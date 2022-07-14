@@ -10,6 +10,10 @@ Common algorithms in JavaScript
 
 ### TopoSort
 
+### DeferredQueue
+
+### FiniteStateMachine
+
 ## License
 
 MIT

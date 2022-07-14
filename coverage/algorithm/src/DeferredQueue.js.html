@@ -1,51 +1,68 @@
+
 <!doctype html>
 <html lang="en">
+
 <head>
-    <title>Code coverage report for TopoSort.js</title>
+    <title>Code coverage report for algorithm/src/DeferredQueue.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
+    
 <body>
 <div class='wrapper'>
-  <div class='pad1'>
-    <h1>
-      <a href="index.html">All files</a> TopoSort.js
-    </h1>
-    <div class='clearfix'>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
-        <span class="quiet">Statements</span>
-        <span class='fraction'>43/43</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">95.45% </span>
-        <span class="quiet">Branches</span>
-        <span class='fraction'>21/22</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
-        <span class="quiet">Functions</span>
-        <span class='fraction'>8/8</span>
-      </div>
-      <div class='fl pad1y space-right2'>
-        <span class="strong">100% </span>
-        <span class="quiet">Lines</span>
-        <span class='fraction'>41/41</span>
-      </div>
+    <div class='pad1'>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">algorithm/src</a> DeferredQueue.js</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">96.96% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>32/33</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">87.5% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>7/8</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">90% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>9/10</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">96.96% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>32/33</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
     </div>
-    <p class="quiet">
-      Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
-    </p>
-  </div>
-  <div class='status-line high'></div>
-<pre><table class="coverage">
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
 <a name='L3'></a><a href='#L3'>3</a>
@@ -174,13 +191,55 @@
 <a name='L126'></a><a href='#L126'>126</a>
 <a name='L127'></a><a href='#L127'>127</a>
 <a name='L128'></a><a href='#L128'>128</a>
-<a name='L129'></a><a href='#L129'>129</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L129'></a><a href='#L129'>129</a>
+<a name='L130'></a><a href='#L130'>130</a>
+<a name='L131'></a><a href='#L131'>131</a>
+<a name='L132'></a><a href='#L132'>132</a>
+<a name='L133'></a><a href='#L133'>133</a>
+<a name='L134'></a><a href='#L134'>134</a>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a>
+<a name='L137'></a><a href='#L137'>137</a>
+<a name='L138'></a><a href='#L138'>138</a>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -201,253 +260,246 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
-&nbsp;
-const { _ } = require('rk-utils');
-&nbsp;
-/**
- * @class
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * id, job, dueAt, status, batchId (default '*'), dispatchedAt, lockFlag
+ * uniqueKeys: [ job, batchId ]
+ *
+ * todo: automatically create db structure if not exist
  */
-class TopoSort {    
-    /**
-     * Map of nodes to a set of nodes as dependents, &lt;string, Set.&lt;string&gt;&gt;
-     * @member {object}
-     */
-    mapOfDependents = {};
+class DeferredQueue {
+    constructor(app, storageModel, processTimeout) {
+        this.app = app;
+        this.storage = this.app.model(storageModel);
+        this.processTimeout = processTimeout || 600000;
+    }
 &nbsp;
-    /**
-     * Map of nodes to a set of nodes as dependencies, &lt;string, Set.&lt;string&gt;&gt;
-     * @member {object}
-     */
-    mapOfDependencies = {};
+    genreateBatchId() {
+        const { Generators } = require('@genx/data');
+        return Generators.shortid();
+    }
 &nbsp;
-    /**
-     * Add edges(or one edge, if values is non-array).
-     * @param {string} dependency - Incoming node (dependency)
-     * @param {string|array} dependents - Outgoing node or nodes
-     */
-    add(dependency, newDependents) {
-        //cast to array
-        newDependents = Array.isArray(newDependents) ? newDependents : [ newDependents ];
+    async postJobRequest_(job, deferedTime) {
+        const now = this.app.now();
+        const due = now.plus({ mill<span class="branch-1 cbranch-no" title="branch not covered" >iseco</span>nds: deferedTime || 3000 });
 &nbsp;
-        //get the existing dependents
-        let dependents = this.mapOfDependents[dependency];
-&nbsp;
-        newDependents.forEach(dependent =&gt; {
-            //get the existing dependencies
-            let dependencies = this.mapOfDependencies[dependent];
-            if (!dependencies) {
-                //new set of dependencies
-                this.mapOfDependencies[dependent] = new Set([ dependency ]); 
-            } else {
-                dependencies.add(dependency);
+        const queuedJob = await this.storage.create_(
+            {
+                job: JSON.stringify(job),
+                dueAt: due,
+                batchId: '*',
+            },
+            null,
+            {
+                insertIgnore: true,
             }
+        );
 &nbsp;
-            if (dependents) {
-                dependents.add(dependent);
+        return queuedJob;
+    }
+&nbsp;
+    async popExpiredRequests_() {
+        const expired = this.app
+            .now()
+            .minus({ milliseconds: this.processTimeout });
+        const lockerId = this.genreateBatchId();
+&nbsp;
+        const updated = await this.storage.updateMany_(
+            {
+                lockerId,
+            },
+            {
+                $query: {
+                    batchId: { $neq: '*' },
+                    dispatchedAt: { $lte: expired },
+                    lockerId: { $exists: false },
+                },
+                $retrieveUpdated: {
+                    $query: {
+                        lockerId,
+                    },
+                },
+            }
+        );
+&nbsp;
+        if (updated.length &gt; 0) {
+            await this.remove_({ lockerId });
+        }
+&nbsp;
+        return updated;
+    }
+&nbsp;
+    async processDueRequests_() {
+        const now = this.app.now();
+        const batchId = this.genreateBatchId();
+&nbsp;
+        const updated = await this.storage.updateMany_(
+            {
+                batchId,
+                dispatchedAt: now,
+            },
+            {
+                $query: {
+                    batchId: '*',
+                    dueAt: { $lte: now },
+                },
+                $retrieveUpdated: {
+                    $query: {
+                        batchId,
+                    },
+                },
+            }
+        );
+&nbsp;
+        return updated;
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered" ></span>    async remove_(conditon) {
+<span class="cstat-no" title="statement not covered" >        await this.storage.deleteMany_(</span>conditon);
+    }
+&nbsp;
+    async removeById_(id) {
+        await this.storage.deleteOne_(id);
+    }
+&nbsp;
+    async clearQueue_() {
+        await this.storage.deleteAll_();
+    }
+&nbsp;
+    async getBatchStatus_() {
+        const batchStats = await this.storage.findAll_({
+            $projection: [
+                'batchId',
+                this.storage.db.connector.queryCount(null, 'batchId'),
+            ],
+            $query: {
+                lockerId: { $exists: false },
+            },
+            $groupBy: ['batchId'],
+            $skipOrm: true,
+        });
+&nbsp;
+        let pending = 0;
+        let processing = 0;
+        const batches = {};
+&nbsp;
+        batchStats.forEach((batch) =&gt; {
+            if (batch[0] === '*') {
+                pending = batch[1];
+            } else {
+                batches[batch[0]] = batch[1];
+                processing += batch[1];
             }
         });
 &nbsp;
-        if (!dependents) {
-            //new set of dependents
-            this.mapOfDependents[dependency] = new Set(newDependents);
-        }
-    }
-&nbsp;
-    hasDependency(node) {
-        return (this.mapOfDependencies[node] &amp;&amp; this.mapOfDependencies[node].size &gt; 0) || false;
-    }
-&nbsp;
-    hasDependent(node) {
-        return (this.mapOfDependents[node] &amp;&amp; this.mapOfDependents[node].size &gt; 0) || false;
-    }
-&nbsp;
-    /**
-     * Sort the graph. Circular graph throw an error with the circular nodes info.
-     * Implementation of http://en.wikipedia.org/wiki/Topological_sorting#Algorithms
-     * Reference: http://courses.cs.washington.edu/courses/cse326/03wi/lectures/RaoLect20.pdf
-     * @return {Array} Sorted list
-     */
-    sort() {        
-        // The list contains the final sorted nodes.
-        let l = [];
-&nbsp;
-        // Find all the initial 0 incoming edge nodes. If not found, this is is a circular graph, cannot be sorted.         
-        let nodesWithDependents = Object.keys(this.mapOfDependents);
-        let nodesWithDependencies = Object.keys(this.mapOfDependencies);
-&nbsp;
-        let initialNodes = new Set(nodesWithDependents);
-        nodesWithDependencies.forEach(nodeHasDependency =&gt; initialNodes.delete(nodeHasDependency));
-&nbsp;
-        // List of nodes with no unsorted dependencies
-        let s = [...initialNodes];
-&nbsp;
-        let allNodes = new Set(nodesWithDependents.concat(nodesWithDependencies));
-&nbsp;
-        // number of unsorted nodes. If it is not zero at the end, this graph is a circular graph and cannot be sorted.
-        let unsorted = allNodes.size;
-&nbsp;
-        let numWithDependencies = _.mapValues(this.mapOfDependencies, node =&gt; node.size);
-&nbsp;
-        while (s.length !== 0){
-            let n = s.shift();
-            l.push(n);
-&nbsp;
-            // decrease unsorted count, node n has been sorted.
-            --unsorted;
-&nbsp;
-            // n node might have no dependency, so have to check it.
-            let dependentsOfN = this.mapOfDependents[n];
-            if (dependentsOfN) {
-                
-                // decease n's adjacent nodes' incoming edges count. If any of them has 0 incoming edges, push them into s get them ready for detaching from the graph.
-                for (let dependentOfN of dependentsOfN) {                    
-&nbsp;
-                    if (--numWithDependencies[dependentOfN] === 0) {
-                        //no unsorted dependencies
-                        s.push(dependentOfN);
-                    }
-                };
-            }
-        }
-&nbsp;
-        // If there are unsorted nodes left, this graph is a circular graph and cannot be sorted.
-        // At least 1 circular dependency exist in the nodes with non-zero incoming edges.
-        if (unsorted !== 0) {
-            let circular = [];
-            
-            for (let node in numWithDependencies) {
-                <span class="missing-if-branch" title="else path not taken" >E</span>if (numWithDependencies[node] !== 0){
-                    circular.push(node);
-                }
-            }
-&nbsp;
-            throw new Error('At least 1 circular dependency in nodes: \n\n' + circular.join('\n') + '\n\nGraph cannot be sorted!');
-        }
-&nbsp;
-        return l;
+        return {
+            numPending: pending,
+            numProcessing: processing,
+            batches,
+        };
     }
 }
 &nbsp;
-module.exports = TopoSort;</pre></td></tr>
-</table></pre>
-<div class='push'></div><!-- for sticky footer -->
-</div><!-- /wrapper -->
-<div class='footer quiet pad2 space-top1 center small'>
-  Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Oct 29 2019 22:03:39 GMT+1100 (Australian Eastern Daylight Time)
-</div>
-</div>
-<script src="prettify.js"></script>
-<script>
-window.onload = function () {
-        if (typeof prettyPrint === 'function') {
-            prettyPrint();
-        }
-};
-</script>
-<script src="sorter.js"></script>
-<script src="block-navigation.js"></script>
-</body>
+module.exports = DeferredQueue;
+&nbsp;</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at Thu Jul 14 2022 19:40:07 GMT+1000 (Australian Eastern Standard Time)
+            </div>
+        <script src="../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
+    </body>
 </html>
+    

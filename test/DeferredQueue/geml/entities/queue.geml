@@ -6,7 +6,7 @@ entity queue
     batchId : text maxLength(32)
     job : text maxLength(200) 
     dueAt : datetime        
-    dispatchedAt : datetime        
+    dispatchedAt : datetime default(@@now)       
     lockerId : text maxLength(32) emptyAsNull optional
   index
     [ job, batchId ] is unique

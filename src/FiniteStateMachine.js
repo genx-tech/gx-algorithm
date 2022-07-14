@@ -23,7 +23,7 @@ class FiniteStateMachine {
         (array) =>
         async (...args) => {
             const l = array.length;
-                const reason = [];
+            const reason = [];
 
             for (let i = 0; i < l; i++) {
                 const checker_ = array[i];
@@ -83,7 +83,7 @@ class FiniteStateMachine {
         }
 
         const allowed = [];
-            const disallowed = [];
+        const disallowed = [];
 
         await eachAsync_(transitions, async (rule, action) => {
             const [actionAllowed, disallowedReason] =

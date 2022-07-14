@@ -1,21 +1,22 @@
 'use strict';
 
 const path = require('path');
-const { fs, runCmd_, sleep_ } = require('rk-utils');
+const { cmd } = require('@genx/sys');
+const { sleep_ } = require('@genx/july');
 const App = require('@genx/app');
 
 const DeferredQueue = require('../DeferredQueue');
 
 const WORKING_DIR = path.resolve(__dirname, '../../test/DeferredQueue');
 
-describe.skip('DeferredQueue', function () {
+describe('DeferredQueue', function () {
     let cliApp, queue;
 
     before(async function () {
-        await runCmd_(
+        await cmd.run_(
             './node_modules/.bin/genx-eml build -c ./test/DeferredQueue/conf/app.default.json'
         );
-        await runCmd_(
+        await cmd.run_(
             './node_modules/.bin/genx-eml migrate -c ./test/DeferredQueue/conf/app.default.json -r'
         );
 

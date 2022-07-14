@@ -1,6 +1,6 @@
 'use strict';
 
-const { sleep_ } = require('rk-utils');
+const { sleep_ } = require('@genx/july');
 const FSM = require('../FiniteStateMachine');
 
 describe('unit:fsm', function () {

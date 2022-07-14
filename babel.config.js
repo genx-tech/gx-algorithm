@@ -21,15 +21,7 @@ module.exports = function (api) {
     }
 
     plugins.push(
-        ...[
-            [
-                '@babel/plugin-proposal-decorators',
-                {
-                    decoratorsBeforeExport: true,
-                },
-            ],
-            '@babel/plugin-proposal-class-properties',
-        ]
+        ...['@babel/plugin-proposal-class-properties', 'add-module-exports']
     );
 
     const opts = {

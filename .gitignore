@@ -27,3 +27,4 @@ Thumbs.db
 test/temp
 .nyc_output
 coverage
+lib/__tests__

@@ -1,8 +1,9 @@
 # .npmignore 
 
-.hushy/
+.husky
 .babelrc
-.swc.cjs.json
+.swcrc
+swc.build.json
 .gitignore
 .gitattributes
 .mocharc.js
@@ -18,3 +19,4 @@ docs
 coverage
 .nyc_output
 lib/**/unitSpecs
+lib/__tests__

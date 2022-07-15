@@ -26,6 +26,7 @@ module.exports = function (api) {
 
     const opts = {
         ...(isRegister ? {} : targets),
+        ...(isProduction ? { minified: true } : {}),
         sourceMaps: isProduction ? true : 'inline',
         presets: [
             [

@@ -1,8 +1,12 @@
 # .npmignore 
 
+.hushy/
 .babelrc
+.swc.cjs.json
 .gitignore
 .gitattributes
+.mocharc.js
+.prettierignore
 .travis.yml
 jsdoc.json
 babel.config.js

@@ -46,8 +46,8 @@ class DeferredQueue {
                 dispatchedAt: { $lte: expired },
                 lockerId: { $exists: false },
             },
-            $retrieveDbResult: true   
-        }            
+            $retrieveDbResult: true,
+        };
 
         await this.remove_(deleteOptions);
 

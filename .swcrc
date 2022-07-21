@@ -1,5 +1,5 @@
 {
-    "$schema": "https://json.schemastore.org/swcrc",    
+    "$schema": "https://json.schemastore.org/swcrc",
     "jsc": {
         "parser": {
             "syntax": "ecmascript",

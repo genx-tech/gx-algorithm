@@ -1,6 +1,6 @@
 {
     "name": "@genx/algorithm",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Commonly used data structure & algorithms",
     "main": "lib/index",
     "module": "lib/index",
@@ -48,7 +48,7 @@
         "@commitlint/config-conventional": "^11.0.0",
         "@genx/app": "^2.0.4",
         "@genx/data": "^2.1.1",
-        "@genx/model": "^2.0.0",
+        "@genx/model": "^2.0.1",
         "@genx/sys": "^0.1.6",
         "@react-native-community/eslint-config": "^2.0.0",
         "@release-it/conventional-changelog": "^2.0.0",

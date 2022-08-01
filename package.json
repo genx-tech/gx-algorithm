@@ -1,6 +1,6 @@
 {
     "name": "@genx/algorithm",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Commonly used data structure & algorithms",
     "main": "lib/index",
     "module": "lib/index",

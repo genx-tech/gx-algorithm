@@ -2,6 +2,7 @@
 
 .husky
 .babelrc
+.changeset
 .swcrc
 swc.build.json
 .gitignore
@@ -10,7 +11,7 @@ swc.build.json
 .prettierignore
 .travis.yml
 jsdoc.json
-babel.config.js
+swc.build.json
 *.log
 src
 test
@@ -18,5 +19,4 @@ examples
 docs
 coverage
 .nyc_output
-lib/**/unitSpecs
 lib/__tests__

@@ -14,6 +14,8 @@ Common algorithms in JavaScript
 
 ### FiniteStateMachine
 
+### Search (bfs, dfs)
+
 ## License
 
 MIT

@@ -9,7 +9,7 @@ const DeferredQueue = require('../DeferredQueue');
 
 const WORKING_DIR = path.resolve(__dirname, '../../test/DeferredQueue');
 
-describe.only('DeferredQueue', function () {
+describe('DeferredQueue', function () {
     let cliApp, queue;
 
     before(async function () {

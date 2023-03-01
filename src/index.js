@@ -10,4 +10,5 @@ module.exports = {
 
     // algorithm
     TopoSort: require('./TopoSort'),
+    Search: require('./Search'),
 };

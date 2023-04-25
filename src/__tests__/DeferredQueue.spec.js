@@ -94,6 +94,7 @@ describe('DeferredQueue', function () {
         jobs.length.should.be.exactly(1);
     });
 
+    
     it('no limit with different type or param', async function () {
         await queue.clearQueue_();
 

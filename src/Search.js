@@ -6,7 +6,7 @@
  * @returns {Object} The node found
  */
 function bfs(root, visit, getChildren) {
-    const queue = [root];
+    const queue = Array.isArray(root) ? [...root] : [root];
     const visited = new Set();
     visited.add(root);
 
